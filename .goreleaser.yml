@@ -8,17 +8,17 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
-      - freebsd
-      - netbsd
-      - openbsd
+      # - freebsd
+      # - netbsd
+      # - openbsd
       - linux
       - darwin
     goarch:
-      - "386"
+      # - "386"
       - amd64
-      - arm
+      # - arm
       - arm64
-      - ppc64le
+      # - ppc64le
 
 checksum:
   name_template: 'checksums.txt'
