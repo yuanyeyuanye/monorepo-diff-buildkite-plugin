@@ -29,7 +29,7 @@ type WaitAllowFailureStep struct{}
 
 func (WaitAllowFailureStep) MarshalYAML() (interface{}, error) {
 	return map[string]interface{}{
-		"wait":                 nil,
+		"wait":                nil,
 		"continue_on_failure": true,
 	}, nil
 }
