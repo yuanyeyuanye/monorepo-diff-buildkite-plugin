@@ -482,6 +482,7 @@ steps:
       soft_fail: true
       notify:
         - slack: '@adikari'
+    - wait: null
     - trigger: notification-test
       command: command-to-run
       notify:
@@ -490,6 +491,7 @@ steps:
             context: my-custom-status
         - slack: '@someuser'
           if: build.state === "passed"
+    - wait: null
     - group: my group
       steps:
         - trigger: foo-service-pipeline
@@ -573,6 +575,7 @@ func TestGeneratePipelineWithCondition(t *testing.T) {
     - label: Deploy
       if: build.branch == 'main' && build.pull_request.id == null
       command: echo deploy to production
+    - wait: null
     - trigger: test-pipeline
       if: build.message =~ /\[deploy\]/
 `
