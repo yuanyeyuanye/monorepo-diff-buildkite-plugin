@@ -221,10 +221,14 @@ func generatePipeline(steps []Step, plugin Plugin) (*os.File, bool, error) {
 		return nil, false, fmt.Errorf("could not create temporary pipeline file: %v", err)
 	}
 
-	yamlSteps := make([]yaml.Marshaler, len(steps))
+	yamlSteps := make([]yaml.Marshaler, 0)
 
 	for i, step := range steps {
-		yamlSteps[i] = step
+		yamlSteps = append(yamlSteps, step)
+		// Add a wait step between each triggered pipeline (but not after the last one)
+		if i < len(steps)-1 {
+			yamlSteps = append(yamlSteps, WaitStep{})
+		}
 	}
 
 	if plugin.Wait {
